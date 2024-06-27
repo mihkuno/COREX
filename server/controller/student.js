@@ -23,18 +23,18 @@ async function create(req, res) {
         // TODO: replace when auth is added
         // Student.email_address   = req.body.email_address;
         // Student.email_name      = req.body.email_name;
+        
 
-        // find if the certificate already exists
+        // find if the certificate hash already exists
         const isCertificateExist = await Database.Student.findOne(
             { certificate: Student.certificate });
 
         if (!isCertificateExist) {       
             Student = await Database.Student(Student).save();
-            console.log('Created Student');
+            console.log('Certificate creation successful.');
         }
         else {
             Student = isCertificateExist;
-            console.log('Student already exists');
 
             // send exists message
             return res.status(409).send({ 
@@ -77,7 +77,7 @@ async function create(req, res) {
 
         // send success message
         res.status(201).send({ 
-            message: 'Data inserted to the database.' 
+            message: 'Certificate data inserted to the database.' 
         });
 
     }
@@ -109,6 +109,8 @@ async function create(req, res) {
         });
     }
 }
+
+
 
 const Student = { create };
 export default Student;
