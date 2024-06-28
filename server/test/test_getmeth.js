@@ -68,7 +68,6 @@ Database.mongoose
             }
         }
         
-
         async function getStudentName(id) {
             try {
                 const studentName = await Database.Student.findOne({ student_id: id }, { first_name: 1, last_name: 1 });
